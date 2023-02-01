@@ -9,7 +9,7 @@ import {
   Label,
   Line,
   Title,
-} from "../styles/styles.jsx";
+} from "../../styles/styles.jsx";
 
 interface FormUserLogin {
   email: string;
