@@ -1,7 +1,15 @@
+import { Routes, Route } from 'react-router'
+
+import { Login } from './pages/Login'
+import { Registe } from './pages/Registe'
+
 function App() {
   return (
     <div>
-      <h1>Iniciando os trabalhos</h1>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/cadastro" element={<Registe />} />
+      </Routes>
     </div>
   )
 }
