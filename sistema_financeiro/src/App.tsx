@@ -1,9 +1,12 @@
+import "./global.css";
+import { Login } from "./pages/Login";
+
 function App() {
   return (
     <div>
-      <h1>Iniciando os trabalhos</h1>
+      <Login />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
