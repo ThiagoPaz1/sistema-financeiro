@@ -1,7 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
 import { createServer, Model } from 'miragejs'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+
+import App from './App'
 
 createServer({
   models: {
@@ -15,14 +17,14 @@ createServer({
           id: 1,
           name: "Flavio",
           email: "flavioteste@gmail.com",
-          password: "1234", 
+          password: "1234",
           createdAt: new Date("2023-02-01")
         },
         {
           id: 2,
           name: "Eraldo",
           email: "eraldoteste@gmail.com",
-          password: "12345", 
+          password: "12345",
           createdAt: new Date("2023-02-01")
         }
       ]
@@ -33,9 +35,9 @@ createServer({
     this.namespace = "api"
 
     this.post("/login", (_schema, request) => {
-      const req: {email: string, password: string} = JSON.parse(request.requestBody)
+      const req: { email: string, password: string } = JSON.parse(request.requestBody)
       const findUser = this.schema.all("user").models.find((i: any) => i.email === req.email && i.password === req.password)
-      
+
       if (findUser) {
         return findUser
       } else {
@@ -53,6 +55,8 @@ createServer({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 )
