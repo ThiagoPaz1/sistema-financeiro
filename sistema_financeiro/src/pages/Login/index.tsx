@@ -2,12 +2,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  A,
   Button,
   Div,
   Form,
   Input,
   Label,
-  Line,
   Title,
 } from "../../styles/styles.jsx";
 
@@ -18,8 +18,6 @@ interface FormUserLogin {
 
 export function Login() {
   const { register, handleSubmit, watch } = useForm<FormUserLogin>();
-
-  const onSumit: SubmitHandler<FormUserLogin> = (data) => {};
 
   const notify = () => {
     toast.error("Todos os campos devem ser preenchidos", {
@@ -37,6 +35,10 @@ export function Login() {
   const watchEmail = watch("email");
   const wachPassword = watch("password");
 
+  const onSumit: SubmitHandler<FormUserLogin> = (data) => {
+    if (!watchEmail && !wachPassword) return <h1>oi</h1>;
+  };
+
   const handleFormIsValid = () => {
     if (!watchEmail || !wachPassword) {
       notify();
@@ -46,9 +48,8 @@ export function Login() {
   return (
     <Div>
       <ToastContainer />
-      <Form onSubmit={handleSubmit(onSumit)}>
+      <Form onSubmit={handleSubmit(onSumit)} type="submit">
         <Title>Acesse sua conta</Title>
-        <Line></Line>
         <div>
           <Label>Seu email</Label>
           <Input
@@ -66,11 +67,13 @@ export function Login() {
               required: "required",
             })}
           />
-          <p>
-            <a href="">Esqueci Minha Senha</a>
-          </p>
+          <div>
+            <A href="">Esqueci Minha Senha</A>
+          </div>
         </div>
-        <Button onClick={handleFormIsValid}>Fazer Login</Button>
+        <Button type="submit" onClick={handleFormIsValid}>
+          Fazer Login
+        </Button>
       </Form>
     </Div>
   );
