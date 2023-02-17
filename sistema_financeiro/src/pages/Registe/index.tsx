@@ -4,13 +4,13 @@ import validRegister from "../../utils/validUser"
 import { toast } from 'react-toastify';
 
 export function Registe() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [validUser, setValidUser ] = useState(false)
+  const [name, setName] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
+  const [validUser, setValidUser ] = useState<boolean>(false)
   const nav = useNavigate()
 
-  const validUsuario = () => {
+  const validUsuario = (): any => {
     if (name === "" || email === "" || password === "") {
       return toast.error("Todos os campos deve ser preenchidos")
     }
