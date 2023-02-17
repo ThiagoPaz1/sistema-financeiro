@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import validRegister from "../../utils/validUser"
-import { toast } from 'react-toastify';
+import useNotification from "../../hooks/useNotification";
 
 export function Registe() {
   const [name, setName] = useState<string>("")
@@ -10,14 +10,14 @@ export function Registe() {
   const [validUser, setValidUser ] = useState<boolean>(false)
   const nav = useNavigate()
 
-  const validUsuario = (): any => {
+  const validUsuario = (): void => {
     if (name === "" || email === "" || password === "") {
-      return toast.error("Todos os campos deve ser preenchidos")
+      return useNotification('Todos os campos devem ser preenchidos', 'error')
     }
 
     if(!validRegister(email, name, password)){
         setValidUser(true)
-        return toast.error("Preencha os campos de forma correta")
+        return useNotification('Preencha os compos de forma correta', 'error')
       }
 
       return nav('/')
