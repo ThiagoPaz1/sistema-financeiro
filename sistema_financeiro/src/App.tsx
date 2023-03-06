@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router'
 import { Login } from './pages/Login'
-import { Registe } from './pages/Registe'
+import { Registe } from './pages/Cadastro'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { ToastContainer } from 'react-toastify'

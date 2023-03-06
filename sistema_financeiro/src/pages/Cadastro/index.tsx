@@ -20,6 +20,7 @@ export function Registe() {
         return useNotification('Preencha os compos de forma correta', 'error')
       }
 
+
       return nav('/')
   }
 
