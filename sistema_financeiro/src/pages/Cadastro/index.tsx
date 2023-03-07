@@ -26,6 +26,7 @@ export function Registe() {
       return nav('/')
   }
 
+  
 
   return (
     <>
