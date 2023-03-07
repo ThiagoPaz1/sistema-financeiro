@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import validRegister from "../../utils/validUser"
 import useNotification from "../../hooks/useNotification";
+import { api } from "../../services/api";
 
 export function Registe() {
   const [name, setName] = useState<string>("")
@@ -10,7 +11,7 @@ export function Registe() {
   const [validUser, setValidUser ] = useState<boolean>(false)
   const nav = useNavigate()
 
-  const validUsuario = (): void => {
+  const validUsuario = async (): Promise<void> => {
     if (name === "" || email === "" || password === "") {
       return useNotification('Todos os campos devem ser preenchidos', 'error')
     }
@@ -20,6 +21,7 @@ export function Registe() {
         return useNotification('Preencha os compos de forma correta', 'error')
       }
 
+      await api.post('/user/create', { name, email, password })
 
       return nav('/')
   }
