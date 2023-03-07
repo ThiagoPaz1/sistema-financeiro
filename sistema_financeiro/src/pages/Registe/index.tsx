@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import validRegister from "../../utils/validUser"
+import validInputs from "../../utils/validUser"
 import useNotification from "../../hooks/useNotification";
 import { api } from "../../services/api";
 
@@ -16,7 +16,7 @@ export function Registe() {
       return useNotification('Todos os campos devem ser preenchidos', 'error')
     }
 
-    if(!validRegister(email, name, password)){
+    if(!validInputs(email, password) || name.length < 3){
         setValidUser(true)
         return useNotification('Preencha os compos de forma correta', 'error')
       }

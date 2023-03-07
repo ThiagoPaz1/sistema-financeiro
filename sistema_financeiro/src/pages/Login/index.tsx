@@ -25,7 +25,7 @@ export function Login() {
         </div>
 
         <div>
-          <label htmlFor="email">Senha:</label>
+          <label htmlFor="senha">Senha:</label>
           <input id="senha" type="text" name="senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
         </div>
 
