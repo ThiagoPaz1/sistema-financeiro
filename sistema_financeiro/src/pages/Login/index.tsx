@@ -1,44 +1,36 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom";
-import useNotification from "../../hooks/useNotification"
-import validInputs from "../../utils/validUser"
-
+import React, { useState } from "react";
+import { api } from "../../services/api";
 
 export function Login() {
 
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
-  const nav = useNavigate()
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
 
-  const validUsuario = (): void => {
-    if (email === "" || password === "") {
-      return useNotification('Todos os campos devem ser preenchidos', 'error')
+  const handClick = async () => {
+    try {
+      const login = await api.post('/user/logar', { email, password: senha })
+      console.log(login.data)
+    } catch (error) {
+      console.log(error)
     }
-
-    if(!validInputs(email, password)){
-        return useNotification('Preencha os compos de forma correta', 'error')
-      }
-
-      return nav('/')
   }
 
   return (
-    <>
+    <div>
       <h1>Tela de login</h1>
-      <form action="">
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input type="text" id="email" value={ email } onChange={ (event) => setEmail(event.target.value)} />
-          </div>
+      <form>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input id="email" type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
 
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input type="text" id="password" value={ password } onChange={ (event) => setPassword(event.target.value)} />
-          </div>
-      
-        <button type="button" onClick={ validUsuario } >Cadastrar</button>
+        <div>
+          <label htmlFor="senha">Senha:</label>
+          <input id="senha" type="text" name="senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
+        </div>
+
+        <button type="button" onClick={handClick} >Enviar</button>
       </form>
-      
-    </>
+    </div>
   )
 }
