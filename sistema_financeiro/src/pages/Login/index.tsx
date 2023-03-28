@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import { api } from "../../services/api";
+import useNotification from "../../hooks/useNotification";
 
 export function Login() {
-
+  const nav = useNavigate()
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
 
   const handClick = async () => {
     try {
-      const login = await api.post('/user/logar', { email, password: senha })
-      console.log(login.data)
+      const login = await api.post('/user/session', { email, password: senha })
+      nav('/Home')
     } catch (error) {
-      console.log(error)
+      useNotification('E-mail ou senha inválidos', 'error')
     }
   }
 

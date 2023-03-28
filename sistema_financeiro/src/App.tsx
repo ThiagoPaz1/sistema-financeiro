@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router'
 import { Login } from './pages/Login'
-import { Registe } from './pages/Cadastro'
+import { Registe } from './pages/Registe'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { ToastContainer } from 'react-toastify'
@@ -10,9 +10,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/cadastro" element={<Registe />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/*" element={ <NotFound /> } />
       </Routes>
       <ToastContainer />
