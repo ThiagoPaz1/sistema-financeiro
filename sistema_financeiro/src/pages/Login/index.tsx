@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { api } from "../../services/api";
 import useNotification from "../../hooks/useNotification";
@@ -8,14 +8,21 @@ export function Login() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
 
-  const handClick = async () => {
+  const handClick = async (): Promise<void> => {
     try {
       const login = await api.post('/user/session', { email, password: senha })
+      localStorage.setItem("token", login.data.token)
       nav('/Home')
     } catch (error) {
       useNotification('E-mail ou senha inválidos', 'error')
     }
   }
+
+  useEffect(() => {
+    if(localStorage.getItem('token')){
+      nav('/Home')
+    }
+  }, [])
 
   return (
     <div>
